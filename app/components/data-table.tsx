@@ -29,12 +29,14 @@ interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
   loading: boolean;
+  link: string;
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
   loading,
+  link,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [pagination, setPagination] = useState<PaginationState>({
@@ -58,10 +60,13 @@ export function DataTable<TData, TValue>({
       columnFilters,
     },
   });
+  const handleButtonClick = () => {
+    window.open(link, "_blank")?.focus;
+  };
 
   return (
     <>
-      <div className="flex items-center py-4">
+      <div className="flex items-center py-4 justify-between">
         <Input
           placeholder="Filter payees..."
           value={(table.getColumn("payee")?.getFilterValue() as string) ?? ""}
@@ -70,6 +75,12 @@ export function DataTable<TData, TValue>({
           }
           className="max-w-sm"
         />
+        <Button
+          onClick={handleButtonClick}
+          className="bg-green-600 hover:bg-green-800"
+        >
+          Link to Sheet
+        </Button>
       </div>
       <div className="overflow-hidden rounded-md border">
         <Table>

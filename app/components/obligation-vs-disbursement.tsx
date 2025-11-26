@@ -4,6 +4,9 @@ import { toast } from "sonner";
 import { DataTable } from "./data-table";
 import { columns } from "./obligation-vs-disbursement-columns";
 
+const link =
+  "https://docs.google.com/spreadsheets/d/1YDhJ46CGPpo6W6hTJtCgzlaIT3gtU9k6X4fLYoHm48Y/edit?pli=1&gid=508698332#gid=508698332";
+
 async function getRecordVSObligtionData() {
   try {
     const request = await fetch("/api/obligation-vs-disbursement");
@@ -38,6 +41,7 @@ export default function ObligationVSDisbursement() {
       columns={columns}
       data={data ?? []}
       loading={isLoading}
+      link={link}
     ></DataTable>
   );
 }

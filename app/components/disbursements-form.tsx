@@ -28,6 +28,12 @@ type orsNumberData = {
   amount_obligated: number;
 };
 
+const link_copy =
+  "https://docs.google.com/spreadsheets/d/1YDhJ46CGPpo6W6hTJtCgzlaIT3gtU9k6X4fLYoHm48Y/edit?pli=1&gid=115803679#gid=115803679";
+
+const link_orig =
+  "https://docs.google.com/spreadsheets/d/1YDhJ46CGPpo6W6hTJtCgzlaIT3gtU9k6X4fLYoHm48Y/edit?pli=1&gid=2013995358#gid=2013995358";
+
 async function getORSNumbers(): Promise<string[] | null> {
   try {
     const request = await fetch("api/obligations/get-ors-numbers");
@@ -117,13 +123,25 @@ export default function DisbursementForm() {
     form.setFieldValue("amount_obligated", amount_obligated);
     form.setFieldValue("payee", payee);
   }
+
+  const handleButtonClick = () => {
+    window.open(link_copy, "_blank")?.focus();
+  };
   return (
     <Card>
-      <CardHeader>
-        <CardTitle>Disbursements</CardTitle>
-        <CardDescription>
-          Fill out the form below to record a new disbursement
-        </CardDescription>
+      <CardHeader className="flex">
+        <div className="w-full">
+          <CardTitle>Disbursements</CardTitle>
+          <CardDescription>
+            Fill out the form below to record a new disbursement
+          </CardDescription>
+        </div>
+        <Button
+          onClick={handleButtonClick}
+          className="bg-green-600 hover:bg-green-800"
+        >
+          Link to Disburseents Sheet
+        </Button>
       </CardHeader>
       <CardContent className="grid gap-6">
         <form

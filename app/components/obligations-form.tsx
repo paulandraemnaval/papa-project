@@ -33,6 +33,12 @@ type trackingNumberData = {
   amount: number;
 };
 
+const link_copy =
+  "https://docs.google.com/spreadsheets/d/1YDhJ46CGPpo6W6hTJtCgzlaIT3gtU9k6X4fLYoHm48Y/edit?pli=1&gid=353562777#gid=353562777";
+
+const link_orig =
+  "https://docs.google.com/spreadsheets/d/1YDhJ46CGPpo6W6hTJtCgzlaIT3gtU9k6X4fLYoHm48Y/edit?pli=1&gid=1173581320#gid=1173581320";
+
 async function getOblicationTrackingNumbers(): Promise<string[] | null> {
   try {
     const request = await fetch("/api/record-log/get-tracking-numbers");
@@ -129,13 +135,25 @@ export default function ObligationsForm() {
     form.setFieldValue("amount", trackingNumberData.amount);
   }
 
+  const handleButtonClick = () => {
+    window.open(link_copy, "_blank")?.focus();
+  };
+
   return (
     <Card>
-      <CardHeader>
-        <CardTitle>Obligations</CardTitle>
-        <CardDescription>
-          Fill out the form below to record a new obligation.
-        </CardDescription>
+      <CardHeader className="flex ">
+        <div className="w-full">
+          <CardTitle>Obligations</CardTitle>
+          <CardDescription>
+            Fill out the form below to record a new obligation.
+          </CardDescription>
+        </div>
+        <Button
+          onClick={handleButtonClick}
+          className="bg-green-600 hover:bg-green-800"
+        >
+          Link to Obligations Sheet
+        </Button>
       </CardHeader>
       <CardContent className="grid gap-6">
         <form

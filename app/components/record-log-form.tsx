@@ -23,6 +23,12 @@ import {
 import { useState } from "react";
 import { Spinner } from "@/components/ui/spinner";
 
+const link_copy =
+  "https://docs.google.com/spreadsheets/d/1YDhJ46CGPpo6W6hTJtCgzlaIT3gtU9k6X4fLYoHm48Y/edit?pli=1&gid=215584450#gid=215584450";
+
+const link_orig =
+  "https://docs.google.com/spreadsheets/d/1YDhJ46CGPpo6W6hTJtCgzlaIT3gtU9k6X4fLYoHm48Y/edit?pli=1&gid=0#gid=0";
+
 export default function RecordLogForm() {
   const [loading, setLoading] = useState(false);
   const form = useForm({
@@ -62,13 +68,25 @@ export default function RecordLogForm() {
     },
   });
 
+  const handleButtonClick = () => {
+    window.open(link_copy, "_blank")?.focus();
+  };
+
   return (
     <Card>
-      <CardHeader>
-        <CardTitle>Record Log</CardTitle>
-        <CardDescription>
-          Fill out the form below to record a new log entry.
-        </CardDescription>
+      <CardHeader className="flex">
+        <div className="w-full">
+          <CardTitle>Record Log</CardTitle>
+          <CardDescription>
+            Fill out the form below to record a new log entry.
+          </CardDescription>
+        </div>
+        <Button
+          onClick={handleButtonClick}
+          className="bg-green-600 hover:bg-green-800"
+        >
+          Link to Record Log Sheet
+        </Button>
       </CardHeader>
       <CardContent className="grid gap-4">
         <form

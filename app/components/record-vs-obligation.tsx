@@ -4,6 +4,9 @@ import { toast } from "sonner";
 import { DataTable } from "./data-table";
 import { columns } from "./record-vs-obligation-columns";
 
+const link =
+  "https://docs.google.com/spreadsheets/d/1YDhJ46CGPpo6W6hTJtCgzlaIT3gtU9k6X4fLYoHm48Y/edit?pli=1&gid=148874384#gid=148874384";
+
 async function getRecordVSObligtionData() {
   try {
     const request = await fetch("/api/record-vs-obligation");
@@ -38,6 +41,7 @@ export default function RecordVSObligation() {
       columns={columns}
       data={data ?? []}
       loading={isLoading}
-    ></DataTable>
+      link={link}
+    />
   );
 }
